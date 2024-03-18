@@ -1,0 +1,25 @@
+{
+ "content": "||<@404306961098735617>||",
+ "embeds": [
+  {
+   "color": "#FFD00D",
+   "title": "Вы достигли нового уровня!",
+   "description": [
+    ">>> **Ваш тек. уровень:** `1`",
+    "**Ваш опыт:** `8 / 100` "
+   ],
+   "author": {
+    "name": "@iloweye",
+    "icon_url": "https://images-ext-1.discordapp.net/external/R1D0XhVRgK6GI6gZAbX2wPxz9AiaD0kx654Tq-rlb3c/%3Fsize%3D512/https/cdn.discordapp.com/avatars/404306961098735617/cfdb4ee86cf7124ff52a97a071499f19.webp?format=webp&width=640&height=640"
+   },
+   "thumbnail": {
+    
+   },
+   "timestamp": 1709468580,
+   "footer": {
+    "text": "Место в топе: 56"
+   }
+  }
+ ],
+ "components": []
+}

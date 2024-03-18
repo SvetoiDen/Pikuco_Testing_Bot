@@ -1,0 +1,133 @@
+            try:
+                cur = BD_Bot()
+
+                s = requests.Session()
+                data = {
+                    "AUTH_FORM": 'Y',
+                    "TYPE": 'AUTH',
+                    "backurl": '/auth/',
+                    "USER_LOGIN": f'{self.login}',
+                    "USER_PASSWORD": f'{self.password}',
+                }
+
+                role_yes = discord.utils.get(inter.user.guild.roles, id=921650821391863878)
+                role_delete = discord.utils.get(inter.user.guild.roles, id=1203674556087140352)
+
+                user = s.post('https://pikuco.ru/auth/?login=yes', data=data)
+                user_bs = BS(user.content, "html.parser")
+
+                await inter.user.add_roles(role_yes)
+                await inter.user.edit(nick=f'{user_bs.select(".user_title")[0].text.strip()}')
+
+                cur.commit_(f"INSERT INTO accounts VALUES ({str(self.id_pikuco)}, {inter.user.id}, {str(self.login)}, 0, 0, 0, 0, 0)")
+                await inter.user.remove_roles(role_delete)
+
+                await inter.edit_original_response(content=f"{inter.user.mention}, ваша верификация была пройдена.\n"
+                                                   f"Ваши данные от аккаунта были автоматически удалены, и нигде не сохранены\n"
+                                                   f"Благодарим вам за доверие. С уважением, создатели сервера")
+
+                cur.close_()
+            except:
+                embed = discord.Embed(
+                    description=f"{inter.user.mention}, ваша верификация была не пройдена\n"
+                                f"Введите повторно ваши данные от аккаунта правильно.",
+                    color=0xeb144c
+                ).set_author(
+                    name='Ошибка',
+                    icon_url='https://media.discordapp.net/attachments/1175426440066498591/1195456379855573062/icons8--64.png?ex=65b40e83&is=65a19983&hm=110715400b7ff51b96309951ef3b843c61082d3028d8b1b68859839345c4892b&=&format=webp&quality=lossless&width=80&height=80'
+                )
+
+                await inter.edit_original_response(embed=embed)
+
+
+            # embed4 = discord.Embed(
+            #     title='Список команд - RPGGame'
+            # )
+            # embed4.add_field(
+            #     name='?гайд',
+            #     value='Отправляет вам гайд-бук по игре "RPGGame"'
+            # )
+            # embed4.add_field(
+            #     name='?создать',
+            #     value='Создаете аккаунт для игры в "RPGGame"'
+            # )
+            # embed4.add_field(
+            #     name='?профиль',
+            #     value='Вызывает ваш игровой профиль в "RPGame"'
+            # )
+            # embed4.add_field(
+            #     name='?инвентарь',
+            #     value='Открывает инвентарь с вашими шмотками в "RPGGame"'
+            # )
+            # embed4.add_field(
+            #     name='?исследовать (коулдаун = 10 минут)',
+            #     value='Вызывает событие в игре "RPGGame"'
+            # )
+            # embed4.add_field(
+            #     name='?топ_рпг',
+            #     value='Вызывает топ 10 по уровню персонажей в "RPGGame"'
+            # )
+
+                        # embed1 = discord.Embed(
+            #     title='Список Команд - Модерация',
+            #     description='ВНИМАНИЕ: Эти команды только для модерации'
+            # )
+            # embed1.add_field(
+            #     name='?кик (Упомянуть пользователя) (причина)',
+            #     value='Кикает пользователя из сервера (может вернуться)'
+            # )
+            # embed1.add_field(
+            #     name='?бан (Упомянуть пользователя) (причина)',
+            #     value='Банит пользователя из сервера (не может вернуться)'
+            # )
+            # embed1.add_field(
+            #     name='?мьют (Упомянуть пользователя) (причина)',
+            #     value='Не дает пользователю говорить, писать и тд'
+            # )
+            # embed1.add_field(
+            #     name='?размьют (Упомянуть пользователя, имеющий роль Мьют)',
+            #     value='Убирает Мьют с пользователя'
+            # )
+            # embed1.add_field(
+            #     name='?очистить (число)',
+            #     value='Удаляет определенное кол-во сообщении'
+            # )
+            # embed1.add_field(
+            #     name='?Админ_Панель',
+            #     value='Вызывает список команд по Пику_Экономике'
+            # )
+
+        # @commands.Cog.listener()
+        # async def on_member_join(self, member):
+        #     try:
+        #         cur = BD_Bot()
+        #
+        #         cur.commit_(f"INSERT INTO leaderboard VALUES ({member.id}, '{member.name}', 0, 100, 0, 0)")
+        #
+        #         role = discord.utils.get(member.guild.roles, id=895665403760640010)
+        #         channel = self.bot.get_channel(899922851056979988)
+        #
+        #         embed = discord.Embed(
+        #             title='Приветствуем на нашем сервере!',
+        #             description='Это официальный Дискорд сервер PIKUCO, где ты сможешь выкладывать свои тесты и квизы, узнать о себе что-то новое и сравнить предпочтения с мнением широкой аудитории.',
+        #             color=0xffffff
+        #         ).set_image(
+        #             url='https://cdn.discordapp.com/attachments/701876665516687431/1063799420396777512/privet-kak.gif?ex=65d0a8ea&is=65be33ea&hm=f1b9757b1362c1127fdad61f55b601c9f3a0adaf2617a4b2aae6df0dbbade1fb&'
+        #         )
+        #
+        #         message = await channel.send(f"{member.mention}", embed=embed)
+        #         await member.add_roles(role)
+        #         await message.add_reaction('👋')
+        #
+        #         cur.close_()
+        #
+        #     except OperationalError:
+        #         ch = await self.bot.get_channel(config.config.CHANNEL_REPORT)
+        #
+        #         await ch.send(embed=discord.Embed(
+        #             title='Бот был выключен с хоста',
+        #             description='Производится перезапуск бота!',
+        #             color=0xFFFFFF
+        #         ))
+        #         system("python reg.py")
+        #         system('kill 1')
