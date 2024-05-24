@@ -4,11 +4,10 @@ from typing import Any
 class BD_Bot():
     def __init__(self):
         self.mysql = connect.connect(
-            host='81.31.246.83',
-            user='gen_user',
-            password='y8FfoHm>\:-EV5',
-            database='default_db',
-            port=3306
+            host='host',
+            user='user',
+            password='password',
+            database='database',
         )
         self.cursor = self.mysql.cursor(dictionary=True, buffered=True)
 
