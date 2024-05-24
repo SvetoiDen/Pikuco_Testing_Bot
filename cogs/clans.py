@@ -542,7 +542,7 @@ class Clans(commands.Cog):
         await ctx.send(embed=embed, view=Button_Clan())
 
     @commands.command(name='удалить_клан')
-    @commands.has_role(1211743965380870226)
+    @commands.has_role(99999999999999)
     async def delete_clan_(self, ctx: Context, id_clan: int):
         cur = BD_Bot()
         row = cur.get_(f"SELECT * FROM clans WHERE id_clan = {id_clan}")
